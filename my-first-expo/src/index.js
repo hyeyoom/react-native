@@ -1,20 +1,30 @@
-import React from 'react';
-import styled from "styled-components/native";
+import React, {useState} from 'react';
+import styled, {ThemeProvider} from "styled-components/native";
 import Button from './components/Button';
+import {Switch, Text} from "react-native";
+import {darkTheme, lightTheme} from "./theme";
 
 const Container = styled.View`
   flex: 1;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.background};
   align-items: center;
   justify-content: center;
+  text-align: center;
 `
 
 const App = () => {
+    const [isDark, setIsDark] = useState(false)
+    const toggleSwitch = () => setIsDark(!isDark)
+
     return (
-        <Container>
-            <Button title='Hanbit'/>
-            <Button title='React Native'/>
-        </Container>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <Container>
+                <Text title={'switch theme'}>switch theme</Text>
+                <Switch value={isDark} onValueChange={toggleSwitch}/>
+                <Button title='카카오'/>
+                <Button title='네이버'/>
+            </Container>
+        </ThemeProvider>
     )
 }
 
