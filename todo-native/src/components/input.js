@@ -16,13 +16,21 @@ const StyledInput = styled.TextInput.attrs(({theme}) => ({
   color: ${({theme}) => theme.text};
 `
 
+<<<<<<< HEAD
+const Input = ({placeholder, value, onChangeText, onSubmitEditing, onBlur}) => {
+=======
 const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
+>>>>>>> 026d9d23ac7137c23fb111b0976df41453861e9a
     const width = Dimensions.get('window').width
     return (
         <StyledInput
             value={value}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
+<<<<<<< HEAD
+            onBlur={onBlur}
+=======
+>>>>>>> 026d9d23ac7137c23fb111b0976df41453861e9a
             width={width}
             placeholder={placeholder}
             maxLength={50}
@@ -38,7 +46,12 @@ Input.propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.string.isRequired,
     onChangeText: PropTypes.func.isRequired,
+<<<<<<< HEAD
+    onSubmitEditing: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired
+=======
     onSubmitEditing: PropTypes.func.isRequired
+>>>>>>> 026d9d23ac7137c23fb111b0976df41453861e9a
 }
 
 export default Input
