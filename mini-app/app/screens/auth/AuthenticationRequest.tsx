@@ -20,7 +20,10 @@ const AuthenticationRequest = (props?: PropsWithChildren<any>) => {
             />
             <EventButton
                 title={'easy-join'}
-                onPress={() => props?.navigation.navigate('코드입력')}
+                onPress={() => {
+                    Logger.debug('누름')
+                    props?.navigation.navigate('authcode')
+                }}
                 onLongPress={() => Logger.debug('길게 누름')}
             />
         </AuthenticationContainer>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
-import AppNavigator from "./screens/AppNavigator";
+import TopLevelNavigator from "./screens/TopLevelNavigator";
+import {NavigationContainer} from "@react-navigation/native";
+import asyncStorageUtil, {StorageKey} from "./utils/StorageUtil";
 
 /**
  * Switch navigator 역할을 수행함
@@ -17,9 +19,14 @@ const App = () => {
             })
         Logger.debug(`Component has been mounted. Authentication status is ${isSignedIn}`)
     })*/
+    useEffect(() => {
+        asyncStorageUtil.set(StorageKey.USER_INFO, null)
+    })
 
     return (
-        <AppNavigator/>
+        <NavigationContainer>
+            <TopLevelNavigator/>
+        </NavigationContainer>
     )
 
     /*return isSignedIn ?

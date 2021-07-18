@@ -29,7 +29,8 @@ class AsyncStorageUtil implements StorageUtil {
 
     set(key: StorageKey, payload: any): Promise<void> {
         return new Promise((resolve, reject) => {
-            AsyncStorage.setItem(key, JSON.stringify(payload), error => {
+            const data = JSON.stringify(payload)
+            AsyncStorage.setItem(key, data, error => {
                 if (error) {
                     reject(error)
                 }

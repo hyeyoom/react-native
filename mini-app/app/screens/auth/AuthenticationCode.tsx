@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 import React, {PropsWithChildren} from "react";
 import {EventButton} from "../../components/Buttons";
-import {Logger} from "../../utils/Logger";
 import {Input} from "../../components/Inputs";
 import {Text} from "react-native";
-import StorageUtil, {StorageKey} from "../../utils/StorageUtil";
+import asyncStorageUtil, {StorageKey} from "../../utils/StorageUtil";
 import {User} from "../../domain/User";
+import {Logger} from "../../utils/Logger";
 
 const AuthenticationContainer = styled.View`
   flex: 1;
@@ -25,20 +25,20 @@ const AuthenticationCode = (props?: PropsWithChildren<any>) => {
             <EventButton
                 title={'join'}
                 onPress={() => {
-                    const user = new User({name: 'hyeyoom', signature: 'x', token: 'b'})
-                    Logger.debug(`AuthenticationCode#${user}`)
-                    StorageUtil
-                        .set(StorageKey.USER_INFO, user)
-                        .then(_ => {
-                            StorageUtil
-                                .get(StorageKey.USER_INFO)
-                                .then(async user => {
-                                    Logger.debug(`value: ${new User(user)}`)
-                                    props.navigation.popToTop()
-                                })
+                    asyncStorageUtil
+                        .set(StorageKey.USER_INFO, new User({
+                            name: 'hyeyoom', signature: 'x', token: 'b'
+                        }))
+                        .then(() => {
+                            Logger.debug(`${props.navigation.canGoBack()}`)
+                            if (props.navigation.canGoBack()) {
+                                props.navigation.navigate('Home')
+                            }
+                        })
+                        .finally(() => {
+                            Logger.debug('야발')
                         })
                 }}
-                onLongPress={() => Logger.debug('길게 누름')}
             />
         </AuthenticationContainer>
     )
